@@ -7,14 +7,14 @@ body {
   text-align: center;
 }
 
-/* 标题 */
+/* title */
 h2 {
   color: #00f5ff;
   text-shadow: 0 0 10px #00f5ff;
   margin-bottom: 20px;
 }
 
-/* 按钮 */
+/* button */
 button {
   padding: 12px 18px;
   margin: 6px;
@@ -33,12 +33,12 @@ button:hover {
   box-shadow: 0 0 15px #00f5ff;
 }
 
-/* 主按钮 */
+/* main button */
 #genBtn {
   background: linear-gradient(45deg, #00f5ff, #7c4dff);
 }
 
-/* 输出框 */
+/* output */
 #out {
   margin-top: 25px;
   padding: 20px;
@@ -55,12 +55,64 @@ button:hover {
   transition: 0.2s;
 }
 
-/* 鼠标靠近时变成输入光标 */
+/* cursor */
 #out:hover {
   cursor: text;
 }
 
-/* glow 动画 */
+/* glow animation */
 .glow {
   box-shadow: 0 0 20px #00f5ff !important;
+}  
+#feedback {
+  margin-top: 15px;
+  padding: 10px 14px;
+  max-width: 700px;
+  margin: auto;
+  border-radius: 10px;
+  font-size: 14px;
+  color: #00f5ff;
+  background: rgba(0,255,255,0.08);
+  border: 1px solid rgba(0,255,255,0.2);
+  text-align: left;
+  min-height: 20px;
+  transition: 0.3s;
+}
+.modal {
+  position: fixed;
+  top: 20px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  pointer-events: none;
+}
+
+.modal-box {
+  background: rgba(20,20,30,0.95);
+  border: 1px solid #00f5ff;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: #00f5ff;
+  box-shadow: 0 0 20px rgba(0,255,255,0.25);
+  font-size: 14px;
+  position: relative;
+
+  animation: slideDown 0.25s ease;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.hidden {
+  display: none;
 }

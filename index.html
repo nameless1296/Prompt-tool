@@ -6,16 +6,22 @@
 <link rel="stylesheet" href="css.css">
 </head>
 
-
 <body style="background:#111;color:white;font-family:Arial;text-align:center;padding:40px;">
 
 <h2>🎲 Prompt Generator</h2>
 
 <button id="genBtn" onclick="gen()">Generate</button>
 <button onclick="copyText()">Copy Prompt</button>
+<button id="modeBtn" onclick="toggleMode()">Mode: Clean</button>
 
 <pre id="out" style="margin-top:20px;background:#222;padding:15px;" onclick="warnClick()">Click Generate to start...</pre>
+<div id="feedback"style="background:#222;">Waiting for Responds...</div>
+<div id="modal" class="modal hidden">
+  <div class="modal-box">
+    <div id="modal-text">Message</div>
+  </div>
+</div>
 
-</body>
 <script src="script.js"></script>
+</body>
 </html>

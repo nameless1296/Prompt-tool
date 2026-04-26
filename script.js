@@ -1,8 +1,8 @@
 function warnClick(){
-  alert("这不是文本输入框 😏");
+  showModal("This is not an input box 😏");
 }
 
-// ===== 数据 =====
+// ===== data =====
 const pool = {
   style: ["cyberpunk","gothic","streetwear"],
   topwear: ["hoodie","corset","jacket"],
@@ -13,18 +13,68 @@ const pool = {
   lighting: ["neon lighting","soft lighting","cinematic lighting","none"]
 };
 
-// ===== 工具函数 =====
+// ===== tool function =====
 function pick(key){
   const arr = pool[key];
   const val = arr[Math.floor(Math.random()*arr.length)];
-  return val === "none" ? null : val;   // 🔥 none 直接变空
+  return val === "none" ? null : val;
 }
 
-// ===== 状态 =====
+// ===== MODE =====
 let cleanPrompt = "";
 let afterClick = false;
+let copyMode = "clean";
 
-// ===== 主生成函数 =====
+// ==========================
+// 🟢 FEEDBACK(inform)
+// ==========================
+function setFeedback(msg, type = "info"){
+
+  const fb = document.getElementById("feedback");
+  if(!fb) return;
+
+  fb.innerText = msg;
+
+  if(type === "success"){
+    fb.style.color = "#00ffcc";
+  } else if(type === "error"){
+    fb.style.color = "#ff4d4d";
+  } else {
+    fb.style.color = "#00f5ff";
+  }
+
+  setTimeout(() => {
+    fb.innerText = "";
+  }, 1500);
+}
+
+// ==========================
+// 🟣 MODAL(alert)
+// ==========================
+let modalTimer;
+
+function showModal(msg, duration = 1500){
+
+  const modal = document.getElementById("modal");
+  const text = document.getElementById("modal-text");
+
+  text.innerText = msg;
+
+  modal.classList.remove("hidden");
+  modal.style.animation = "none";
+  void modal.offsetWidth;
+  modal.style.animation = "slideDown 0.25s ease";
+
+  clearTimeout(modalTimer);
+
+  modalTimer = setTimeout(() => {
+    modal.classList.add("hidden");
+  }, duration);
+}
+
+// ==========================
+// 🎲 GENERATE
+// ==========================
 function gen(){
 
   const s = pick("style");
@@ -35,12 +85,11 @@ function gen(){
   const a = pick("accessory");
   const l = pick("lighting");
 
-  // ===== 显示版 =====
   const display = [
     s ? `style: ${s}` : null,
     t ? `top: ${t}` : null,
     b ? `bottom: ${b}` : null,
-	f ? `footwear: ${f}` : null,
+    f ? `footwear: ${f}` : null,
     d ? `detail: ${d}` : null,
     a ? `accessory: ${a}` : null,
     l ? `lighting: ${l}` : null,
@@ -50,31 +99,52 @@ function gen(){
 
   document.getElementById("out").innerText = display;
 
-  // ===== clean prompt（AI用）=====
   cleanPrompt = [
-    s,
-    t,
-    b,
-	f,
-    d,
-    a,
-    l,
+    s, t, b, f, d, a, l,
     "masterpiece",
     "best quality"
   ].filter(Boolean).join(", ");
 
-  // ===== afterClick 按钮状态 =====
   const btn = document.getElementById("genBtn");
-
   if (!afterClick) {
     btn.innerText = "Reroll";
     afterClick = true;
   }
+
+  setFeedback("Generate successful ✓", "success");
 }
 
-// ===== 复制 =====
+// ==========================
+// 🔁 MODE SWITCH
+// ==========================
+function toggleMode(){
+
+  copyMode = copyMode === "clean" ? "labeled" : "clean";
+
+  const btn = document.getElementById("modeBtn");
+
+  btn.innerText = copyMode === "clean"
+    ? "Copy: Clean"
+    : "Copy: Labeled";
+	
+  setFeedback("Mode switched");
+}
+
+// ==========================
+// 📋 COPY
+// ==========================
 function copyText(){
-  navigator.clipboard.writeText(cleanPrompt)
-    .then(() => alert("已复制"))
-    .catch(() => alert("复制失败"));
+
+  if(!cleanPrompt){
+    showModal("Please generate first");
+    return;
+  }
+
+  const text = copyMode === "clean"
+    ? cleanPrompt
+    : document.getElementById("out").innerText;
+
+  navigator.clipboard.writeText(text)
+    .then(() => showModal("Copied ✓"))
+    .catch(() => showModal("Copy failed"));
 }
