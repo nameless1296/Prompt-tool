@@ -2,30 +2,37 @@ body {
   margin: 0;
   padding: 40px;
   font-family: Arial;
+
   background: radial-gradient(circle at top, #0f0f1a, #000);
   color: #fff;
   text-align: center;
 }
 
-/* title */
+/* =========================
+   TITLE
+========================= */
 h2 {
   color: #00f5ff;
   text-shadow: 0 0 10px #00f5ff;
   margin-bottom: 20px;
 }
 
-/* button */
+/* =========================
+   BUTTON BASE
+========================= */
 button {
   padding: 12px 18px;
   margin: 6px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+
   font-weight: bold;
   color: #fff;
   background: #111;
+
   box-shadow: 0 0 10px rgba(0,255,255,0.2);
-  transition: 0.2s;
+  transition: 0.2s ease;
 }
 
 button:hover {
@@ -33,51 +40,57 @@ button:hover {
   box-shadow: 0 0 15px #00f5ff;
 }
 
-/* main button */
+/* =========================
+   GEN BUTTON
+========================= */
 #genBtn {
   background: linear-gradient(45deg, #00f5ff, #7c4dff);
 }
 
-/* output */
+/* =========================
+   OUTPUT
+========================= */
 #out {
   margin-top: 25px;
   padding: 20px;
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+
   background: rgba(20,20,30,0.8);
   border: 1px solid rgba(0,245,255,0.3);
   border-radius: 15px;
+
   text-align: left;
   white-space: pre-wrap;
-  box-shadow: 0 0 20px rgba(0,245,255,0.1);
-  cursor: default;
-  transition: 0.2s;
-}
 
-/* cursor */
-#out:hover {
+  box-shadow: 0 0 20px rgba(0,245,255,0.1);
   cursor: text;
 }
 
-/* glow animation */
-.glow {
-  box-shadow: 0 0 20px #00f5ff !important;
-}  
+/* =========================
+   FEEDBACK
+========================= */
 #feedback {
   margin-top: 15px;
   padding: 10px 14px;
   max-width: 700px;
   margin: auto;
+
   border-radius: 10px;
   font-size: 14px;
+
   color: #00f5ff;
   background: rgba(0,255,255,0.08);
   border: 1px solid rgba(0,255,255,0.2);
+
   text-align: left;
   min-height: 20px;
-  transition: 0.3s;
 }
+
+/* =========================
+   MODAL
+========================= */
 .modal {
   position: fixed;
   top: 20px;
@@ -85,7 +98,6 @@ button:hover {
   width: 100%;
   display: flex;
   justify-content: center;
-
   pointer-events: none;
 }
 
@@ -94,59 +106,167 @@ button:hover {
   border: 1px solid #00f5ff;
   padding: 12px 18px;
   border-radius: 10px;
+
   color: #00f5ff;
   box-shadow: 0 0 20px rgba(0,255,255,0.25);
+
   font-size: 14px;
-  position: relative;
 
   animation: slideDown 0.25s ease;
 }
 
 @keyframes slideDown {
-  from {
-    transform: translateY(-10px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(-10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
 
 .hidden {
   display: none;
 }
 
+/* =========================
+   MODE BUTTON
+========================= */
 #modeBtn {
   transition: 0.3s;
 }
 
-/* 🔵 clean mode 呼吸 */
 #modeBtn.clean {
   background: #00f5ff;
   color: #000;
   box-shadow: 0 0 10px #00f5ff;
-  animation: glowCyan 2s ease-in-out infinite;
+  animation: glowCyan 2.2s ease-in-out infinite;
 }
 
-/* 🟣 label mode 呼吸 */
 #modeBtn.label {
   background: #b36bff;
   color: #fff;
   box-shadow: 0 0 10px #b36bff;
-  animation: glowPurple 2s ease-in-out infinite;
+  animation: glowPurple 2.2s ease-in-out infinite;
 }
 
-/* 呼吸动画（cyan） */
 @keyframes glowCyan {
-  0%   { box-shadow: 0 0 4px #00f5ff; transform: scale(1); }
-  50%  { box-shadow: 0 0 10px #00f5ff; transform: scale(1.015); }
+  0% { box-shadow: 0 0 4px #00f5ff; transform: scale(1); }
+  50% { box-shadow: 0 0 10px #00f5ff; transform: scale(1.015); }
   100% { box-shadow: 0 0 4px #00f5ff; transform: scale(1); }
 }
 
-/* 呼吸动画（purple） */
 @keyframes glowPurple {
-  0%   { box-shadow: 0 0 4px #b36bff; transform: scale(1); }
-  50%  { box-shadow: 0 0 10px #b36bff; transform: scale(1.015); }
+  0% { box-shadow: 0 0 4px #b36bff; transform: scale(1); }
+  50% { box-shadow: 0 0 10px #b36bff; transform: scale(1.015); }
   100% { box-shadow: 0 0 4px #b36bff; transform: scale(1); }
+}
+
+/* =========================
+   DROPDOWN WRAPPER
+========================= */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 10px;
+}
+
+/* =========================
+   PRESET BUTTON
+========================= */
+#presetBtn {
+  padding: 12px 18px;
+  border-radius: 10px;
+
+  background: #111;
+  color: #00f5ff;
+
+  border: 1px solid rgba(0,245,255,0.3);
+
+  cursor: pointer;
+  font-weight: bold;
+
+  box-shadow: 0 0 10px rgba(0,255,255,0.2);
+  transition: 0.2s ease;
+}
+
+#presetBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px #00f5ff;
+}
+
+/* =========================
+   DROPDOWN PANEL (UPGRADED)
+========================= */
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  min-width: 190px;
+
+  background: rgba(15, 15, 25, 0.88);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(0,245,255,0.25);
+  border-radius: 14px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.5),
+    0 0 18px rgba(0,245,255,0.15);
+
+  z-index: 10;
+
+  animation: fadeDown 0.2s ease;
+}
+
+/* animation */
+@keyframes fadeDown {
+  from { transform: translate(-50%, -6px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+/* =========================
+   DROPDOWN ITEM (CARD STYLE)
+========================= */
+.dropdown-menu div {
+  padding: 12px 14px;
+  cursor: pointer;
+
+  color: #fff;
+
+  background: transparent;
+
+  transition: 0.2s ease;
+
+  border-left: 2px solid transparent;
+}
+
+/* hover (more “UI feel”) */
+.dropdown-menu div:hover {
+  background: rgba(0,245,255,0.08);
+  color: #00f5ff;
+
+  border-left: 2px solid #00f5ff;
+
+  transform: translateX(4px);
+}
+
+/* active item */
+.dropdown-menu .active {
+  background: rgba(0,245,255,0.12);
+  color: #00f5ff;
+
+  border-left: 2px solid #00f5ff;
+
+  font-weight: bold;
+}
+
+/* checkmark */
+.dropdown-menu .active::before {
+  content: "✓ ";
+  color: #00f5ff;
+}
+
+/* subtle separation */
+.dropdown-menu div:not(:last-child) {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
