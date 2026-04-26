@@ -116,3 +116,37 @@ button:hover {
 .hidden {
   display: none;
 }
+
+#modeBtn {
+  transition: 0.3s;
+}
+
+/* 🔵 clean mode 呼吸 */
+#modeBtn.clean {
+  background: #00f5ff;
+  color: #000;
+  box-shadow: 0 0 10px #00f5ff;
+  animation: glowCyan 2s ease-in-out infinite;
+}
+
+/* 🟣 label mode 呼吸 */
+#modeBtn.label {
+  background: #b36bff;
+  color: #fff;
+  box-shadow: 0 0 10px #b36bff;
+  animation: glowPurple 2s ease-in-out infinite;
+}
+
+/* 呼吸动画（cyan） */
+@keyframes glowCyan {
+  0%   { box-shadow: 0 0 4px #00f5ff; transform: scale(1); }
+  50%  { box-shadow: 0 0 10px #00f5ff; transform: scale(1.015); }
+  100% { box-shadow: 0 0 4px #00f5ff; transform: scale(1); }
+}
+
+/* 呼吸动画（purple） */
+@keyframes glowPurple {
+  0%   { box-shadow: 0 0 4px #b36bff; transform: scale(1); }
+  50%  { box-shadow: 0 0 10px #b36bff; transform: scale(1.015); }
+  100% { box-shadow: 0 0 4px #b36bff; transform: scale(1); }
+}

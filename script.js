@@ -28,6 +28,7 @@ let copyMode = "clean";
 // ==========================
 // 🟢 FEEDBACK(inform)
 // ==========================
+let feedbackTimer;
 function setFeedback(msg, type = "info"){
 
   const fb = document.getElementById("feedback");
@@ -125,11 +126,30 @@ function toggleMode(){
 
   const btn = document.getElementById("modeBtn");
 
+  if(!btn) return;
+
   btn.innerText = copyMode === "clean"
-    ? "Copy: Clean"
-    : "Copy: Labeled";
-	
+    ? "Mode: Simplified"
+    : "Mode: Labelled";
+
+  // ⭐ 核心：切换 class
+  btn.classList.remove("clean", "label");
+  btn.classList.add(copyMode === "clean" ? "clean" : "label");
+
   setFeedback("Mode switched");
+}
+
+function initMode(){
+
+  const btn = document.getElementById("modeBtn");
+  if(!btn) return;
+
+  btn.classList.remove("clean", "label");
+  btn.classList.add(copyMode === "clean" ? "clean" : "label");
+
+  btn.innerText = copyMode === "clean"
+    ? "Mode: Simplified"
+    : "Mode: Labelled";
 }
 
 // ==========================
@@ -150,3 +170,5 @@ function copyText(){
     .then(() => showModal("Copied ✓"))
     .catch(() => showModal("Copy failed"));
 }
+
+document.addEventListener("DOMContentLoaded", initMode);
