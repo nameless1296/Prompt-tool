@@ -43,7 +43,9 @@ function setFeedback(msg, type = "info"){
     fb.style.color = "#00f5ff";
   }
 
-  setTimeout(() => {
+  clearTimeout(feedbackTimer);
+
+  feedbackTimer = setTimeout(() => {
     fb.innerText = "";
   }, 1500);
 }
