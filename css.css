@@ -272,5 +272,5 @@ button:hover {
 }
 
 #presetUI {
-  display: none;
+  opacity: 0.6;
 }
