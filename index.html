@@ -20,7 +20,7 @@
   <button onclick="copyText()">Copy Prompt</button>
 
   <!-- PRESET DROPDOWN -->
-  <div class="dropdown">
+  <div class="dropdown" id="presetUI">
 <button id="presetBtn" onclick="toggleDropdown()">
   <span id="presetLabel">Preset: Random</span>
   <span class="arrow">▼</span>
@@ -30,7 +30,7 @@
       <div data-value="random" onclick="setPreset('random')">Random</div>
       <div data-value="cyberpunk" onclick="setPreset('cyberpunk')">Cyberpunk</div>
       <div data-value="gothic" onclick="setPreset('gothic')">Gothic</div>
-    </div>
+    </div>	 
   </div>
 
   <button id="modeBtn" onclick="toggleMode()">Mode: Simplified</button>
@@ -58,6 +58,18 @@ Click Generate to start...
   </div>
 </div>
 
+<script src="data/style.js"></script>
+<script src="data/headwear.js"></script>
+<script src="data/topwear.js"></script>
+<script src="data/bottom.js"></script>
+<script src="data/footwear.js"></script>
+<script src="data/detail.js"></script>
+<script src="data/headaccessory.js"></script>
+<script src="data/neckaccessory.js"></script>
+<script src="data/limbaccessory.js"></script>
+<script src="data/torsoaccessory.js"></script>
+<script src="data/lighting.js"></script>
+<script src="data/rules.js"></script>
 <script src="script.js"></script>
 
 </body>

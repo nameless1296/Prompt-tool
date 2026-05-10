@@ -1,44 +1,26 @@
+const ENABLE_PRESET = false;
+if(ENABLE_PRESET){
+  document.getElementById("presetUI").style.display = "inline-block";
+}
+
 function warnClick(){
   showModal("This is not an input box 😏");
 }
 
 // ===== data =====
 const pool = {
-  style: ["cyberpunk","gothic","streetwear"],
-  topwear: ["hoodie","corset","jacket"],
-  bottom: ["miniskirt","jeans","shorts"],
-  footwear: ["boots","sneakers","heels"],
-  detail: ["unzipped","tight clothes","layered outfit","none"],
-  accessory: ["choker","gloves","belt","none"],
-  lighting: ["neon lighting","soft lighting","cinematic lighting","none"]
+  style,
+  headwear,
+  topwear,
+  bottom,  
+  footwear,  
+  detail,  
+  headaccessory,  
+  neckaccessory,
+  limbaccessory,
+  torsoaccessory,  
+  lighting,
 };
-
-// ===== PRESETS =====
-const presets = {
-  random: null,
-
-  cyberpunk: {
-    style: "cyberpunk",
-    topwear: ["tech jacket","hoodie","neon corset"],
-    bottom: ["cargo pants","tech skirt"],
-    footwear: ["boots","sneakers"],
-    detail: ["glow lines","holographic"],
-    accessory: ["visor","choker"],
-    lighting: ["neon lighting"]
-  },
-
-  gothic: {
-    style: "gothic",
-    topwear: ["corset","lace dress"],
-    bottom: ["long skirt","black jeans"],
-    footwear: ["boots"],
-    detail: ["dark lace"],
-    accessory: ["choker","veil"],
-    lighting: ["moody lighting"]
-  }
-};
-
-let currentPreset = "random";
 
 // ===== tools =====
 function pick(key){
@@ -109,12 +91,14 @@ function showModal(msg, duration = 1500){
 // PRESET
 // ==========================
 function setPreset(name){
+  if(!ENABLE_PRESET) return;
 
   currentPreset = name;
 
   const btn = document.getElementById("presetBtn");
   if(btn){
-    btn.innerText = "Preset: " + name.charAt(0).toUpperCase() + name.slice(1) + " ▼";
+    document.getElementById("presetLabel").innerText =
+      "Preset: " + name.charAt(0).toUpperCase() + name.slice(1);
   }
 
   const items = document.querySelectorAll("#dropdownMenu div");
@@ -128,17 +112,14 @@ function setPreset(name){
 
   setFeedback("Preset: " + name);
 
-  const menu = document.getElementById("dropdownMenu");
-  if(menu){
-    menu.classList.add("hidden");
-  }
+  document.getElementById("dropdownMenu")?.classList.add("hidden");
 }
 
 function toggleDropdown(){
-  const menu = document.getElementById("dropdownMenu");
-  if(menu){
-    menu.classList.toggle("hidden");
-  }
+  if(!ENABLE_PRESET) 
+  showModal("Under development 🚧"); 
+  return;
+  document.getElementById("dropdownMenu")?.classList.toggle("hidden");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -150,23 +131,35 @@ document.addEventListener("DOMContentLoaded", () => {
 // ==========================
 function gen(){
 
-  const p = presets[currentPreset];
-
+  const p = null;
   const s = p ? p.style : pick("style");
+  const h = p ? pickArray(p.headwear) : pick("headwear");
   const t = p ? pickArray(p.topwear) : pick("topwear");
-  const b = p ? pickArray(p.bottom) : pick("bottom");
+  let b = p ? pickArray(p.bottom) : pick("bottom");
+
+  if(isFullBody(t)){
+    b = null;
+  }
+
   const f = p ? pickArray(p.footwear) : pick("footwear");
   const d = p ? pickArray(p.detail) : pick("detail");
-  const a = p ? pickArray(p.accessory) : pick("accessory");
+  const ha = p ? pickArray(p.headaccessory) : pick("headaccessory");
+  const na = p ? pickArray(p.neckaccessory) : pick("neckaccessory");
+  const la = p ? pickArray(p.limbaccessory) : pick("limbaccessory");
+  const ta = p ? pickArray(p.torsoaccessory) : pick("torsoaccessory");
   const l = p ? pickArray(p.lighting) : pick("lighting");
 
   const display = [
     s ? `style: ${s}` : null,
+    h ? `headwear: ${h}` : null,
     t ? `top: ${t}` : null,
     b ? `bottom: ${b}` : null,
     f ? `footwear: ${f}` : null,
     d ? `detail: ${d}` : null,
-    a ? `accessory: ${a}` : null,
+    ha ? `head accessory: ${ha}` : null,
+	na ? `neck and shoulder accessory: ${na}` : null,
+    la ? `limb accessory: ${la}` : null,
+    ta ? `torso and misc accessory: ${ta}` : null,
     l ? `lighting: ${l}` : null,
     "",
     "masterpiece, best quality"
@@ -175,12 +168,13 @@ function gen(){
   document.getElementById("out").innerText = display;
 
   cleanPrompt = [
-    s, t, b, f, d, a, l,
+    s, h, t, b, f, d, ha, na, la, ta, l,
     "masterpiece",
     "best quality"
   ].filter(Boolean).join(", ");
 
   const btn = document.getElementById("genBtn");
+
   if(!afterClick){
     btn.innerText = "Reroll";
     afterClick = true;
@@ -232,10 +226,6 @@ function copyText(){
 // INIT
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("modeBtn");
-
-  if(btn){
-    btn.classList.add("clean");
-    btn.innerText = "Mode: Simplified";
-  }
+  if(!ENABLE_PRESET) return;
+  setPreset("random");
 });
