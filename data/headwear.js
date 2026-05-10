@@ -1,0 +1,27 @@
+const headwear =  [
+  "balaclava",
+  "coif",
+  "crown",
+  "diadem",
+  "hair bow",
+  "hair ribbon",
+  "hair tie",
+  "hairband",
+  "hat",
+  "headband",
+  "forehead protector",
+  "sweatband",
+  "hachimaki",
+  "mongkhon",
+  "headdress",
+  "maid headdress",
+  "headscarf",
+  "hijab",
+  "tiara",
+  "veil",
+  "honggaitou",
+  "wimple",
+  "fengguan",
+  
+  "none"
+  ];

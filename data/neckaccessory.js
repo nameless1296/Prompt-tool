@@ -1,0 +1,25 @@
+const neckaccessory = [
+  "ascot",
+  "bowtie",
+  "choker",
+  "collar",
+  "cross tie",
+  "epaulettes",
+  "feather boa",
+  "guimpe",
+  "lapels",
+  "lapel pin",
+  "neck ruff",
+  "neckerchief",
+  "necklace",
+  "necktie",
+  "tie clip",
+  "neck ribbon",
+  "scarf",
+  "scarf choker",
+  "shawl",
+  "stole",
+  "usekh collar",
+  
+  "none"
+  ];
